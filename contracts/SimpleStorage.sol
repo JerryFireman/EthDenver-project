@@ -159,7 +159,7 @@ contract SimpleStorage {
         uint yesVote = 0;
         uint noVote = 0;
         uint[] memory membersInGroup = readMemberListInGroup(groupNumber);
-        for (uint i=0; i < membersInGroup.length; i++) {
+        for (uint i = 0; i < membersInGroup.length; i++) {
             if (readMemberVote(membersInGroup[i]) == true) {
                 yesVote++;
             }
@@ -171,9 +171,35 @@ contract SimpleStorage {
         if (yesVote > noVote) {
             return true;
         } else {
-            return false;            
+            return false;
         }
     }
+      uint[] newOldArray; // state variable needs is global for solidity workaround
+    function splitGroup(uint oldGroupNumber, uint[] memory membersToSplit, uint newGroupNumber)
+        public
+    {
+        require(countVotes(oldGroupNumber) == true, "Cannot split group because members have not voted in favor");
+        uint[] memory oldArray = thisOrganization.groups[oldGroupNumber].membersInGroup;
+        //uint[] memory newArray = thisOrganization.groups[newGroupNumber].membersInGroup;
+        //uint[] memory newOldArray; // this array will replace membersInGroup in old group
+        bool found = false;
+        for (uint i=0; i < oldArray.length; i++) {
+            found = false;
+            for (uint j=0; j < membersToSplit.length; j++) {
+                if (oldArray[i] == membersToSplit[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false) {
+                newOldArray.push(oldArray[i]);
+            }
+        }
+        
+        thisOrganization.groups[oldGroupNumber].membersInGroup = newOldArray;
+        thisOrganization.groups[newGroupNumber].membersInGroup = membersToSplit;
+    }
+
     
 
 }
