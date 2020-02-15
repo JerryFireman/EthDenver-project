@@ -9,15 +9,20 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 
 export default class CreateNewGroupModal extends Component {
 	state = {
-		inputArray: [ '123' ]
+		inputArray: [ '' ]
 	};
-	handleOnClick = () => {};
+	handleOnClick = () => {
+		console.log('create group!');
+	};
 	onTextChange = (address, index) => {
-		console.log(address, index);
+		const { inputArray } = this.state;
+		let newInputArray = inputArray;
+		newInputArray[index] = address;
+		this.setState({ inputArray: newInputArray });
 	};
 	handleOnAdd = () => {
 		const { inputArray } = this.state;
-		this.setState({ inputArray: inputArray.concat(1) });
+		this.setState({ inputArray: inputArray.concat('') });
 	};
 	render() {
 		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
@@ -25,7 +30,7 @@ export default class CreateNewGroupModal extends Component {
 		return (
 			<div>
 				<Dialog
-					disableBackdropClick={true}
+					// disableBackdropClick={true}
 					aria-describedby="alert-dialog-description"
 					onClose={closeModal}
 					aria-labelledby="simple-dialog-title"
@@ -45,7 +50,8 @@ export default class CreateNewGroupModal extends Component {
 						<TextWhite>Assign Members</TextWhite>
 						{inputArray.map((item, index) => (
 							<TextInput
-								key={`${item}_${index}`}
+								value={item}
+								key={index}
 								onChange={({ target }) => this.onTextChange(target.value, index)}
 								placeholder={'0xb4124cEB3451....004d8a28c6eE7'}
 							/>
@@ -70,6 +76,7 @@ const TextInput = styled.input`
 	box-sizing: border-box;
 	width: 100%;
 	caret-color: white;
+	margin-bottom: 10px;
 	::placeholder {
 		color: rgba(255, 255, 255, 0.3);
 		font-size: 15px;

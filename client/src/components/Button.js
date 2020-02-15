@@ -14,8 +14,8 @@ export default class Button extends Component {
 }
 
 const ButtonBase = styled.div`
-	width: 313px;
-	height: 77px;
+	width: 200px;
+	height: 50px;
 	border-radius: 8px;
 	box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.5);
 	background-image: linear-gradient(to bottom, #7689a9, ${DUSK});
@@ -23,6 +23,7 @@ const ButtonBase = styled.div`
 	justify-content: center;
 	align-items: center;
 	color: white;
+	cursor: pointer;
 `;
 
 const ButtonMain = styled(ButtonBase)`
