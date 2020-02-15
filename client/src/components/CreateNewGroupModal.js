@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from './Button';
 import { LARGE } from '../Utils/constant';
 
-export default class Modal extends Component {
+export default class CreateNewGroupModal extends Component {
 	render() {
 		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
 		return (
