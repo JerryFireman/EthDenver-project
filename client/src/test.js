@@ -4,14 +4,14 @@ import getWeb3 from './getWeb3';
 
 import './App.css';
 
-class Test extends Component {
+export default class Test extends Component {
 	constructor(props) {
 		super(props);
 		this.setValue = this.setValue.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	state = { storageValue: 0, web3: null, accounts: null, contract: null, value: 0 };
+	state = { storageValue: 0, web3: null, accounts: null, contract: null, value: 0, groupName: null };
 
 	componentDidMount = async () => {
 		try {
@@ -58,6 +58,21 @@ class Test extends Component {
 		this.setState({ storageValue: response });
 	};
 
+	groupName = async (event) => {
+		event.preventDefault();
+
+		const { accounts, contract } = this.state;
+
+		// Stores a given value, 5 by default.
+		await contract.methods.set(this.state.value).send({ from: accounts[0] });
+
+		// Get the value from the contract to prove it worked.
+		const response = await contract.methods.readOrganizationName().call();
+
+		// Update state with the result.
+		this.setState({ groupName: response });
+	};
+
 	handleChange = async (e) => {
 		//e.preventDefault()
 		this.setState({ value: parseInt(e.target.value, 10) });
@@ -84,25 +99,13 @@ class Test extends Component {
 						Name:
 						<input type="text" value={this.state.value} onChange={this.handleChange} />
 					</label>
-					<button value="Submit" onClick={this.setValue}>
+					<button value="Submit" onClick={this.groupName}>
 						Submit{' '}
 					</button>
 				</form>
-
-				<form>
-					<label>
-						Name:
-						<input type="text" value={this.state.value} onChange={this.handleChange} />
-					</label>
-					<button value="Submit" onClick={this.setValue}>
-						Submit{' '}
-					</button>
-				</form>
-
 				<div>The stored value is: {this.state.storageValue}</div>
+				<div>Group: {this.state.groupName}</div>
 			</div>
 		);
 	}
 }
-
-export default Test;
