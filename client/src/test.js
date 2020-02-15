@@ -75,8 +75,6 @@ export default class Test extends Component {
 		this.setState({ storageValue: response });
 	};
 
-
-	//------------------------------ Dao functions -------------------------------
 	groupName = async (event) => {
 		event.preventDefault()
 		
@@ -183,7 +181,6 @@ export default class Test extends Component {
 		// Update state with the result.
 		this.setState({ voteCount: response.toString() });
 	  }; 
-	  //----------------------------------------------------------------------------
 
 	handleChange = async (e) => {
 		//e.preventDefault()
