@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { ORANGEY_YELLOW, SMALL } from '../Utils/constant';
+import { ORANGEY_YELLOW, SMALL, DUSK } from '../Utils/constant';
 
 export default class Button extends Component {
 	render() {
 		const { fontSize, handleOnClick, width, theme } = this.props;
 		return (
-			<ButtonMain theme={theme} width={width} onClick={handleOnClick}>
+			<ButtonBase theme={theme} width={width} onClick={handleOnClick}>
 				<Text fontSize={fontSize}>{this.props.label}</Text>
-			</ButtonMain>
+			</ButtonBase>
 		);
 	}
 }
 
 const ButtonBase = styled.div`
-	box-sizing: border-box;
-	margin: 0px 10px 10px 0;
-	width: 100%;
-	height: 55px;
-	border-radius: 30px;
+	width: 313px;
+	height: 77px;
+	border-radius: 8px;
+	box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.5);
+	background-image: linear-gradient(to bottom, #7689a9, ${DUSK});
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	// transition: background-color 0.3s ease-in-out;
-	// transition-property: background-color, color;
-	@media (max-width: 480px) {
-		width: 100%;
-	}
+	color: white;
 `;
 
 const ButtonMain = styled(ButtonBase)`

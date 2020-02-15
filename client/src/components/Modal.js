@@ -12,7 +12,7 @@ export default class Modal extends Component {
 		return (
 			<div>
 				<Dialog
-					disableBackdropClick={disableBackdropClick || false}
+					disableBackdropClick={true}
 					aria-describedby="alert-dialog-description"
 					onClose={closeModal}
 					aria-labelledby="simple-dialog-title"
