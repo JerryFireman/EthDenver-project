@@ -14,8 +14,10 @@ import {
 	EXTRA_LARGE,
 	SMALL,
 	DARK_RED
-} from '../constant';
+} from '../Utils/constant';
 import Button from '../components/Button';
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 
 const themeDarkGray = {
 	button: {
@@ -39,9 +41,13 @@ const main = {
 export default class Home extends Component {
 	render() {
 		return (
-			<Container>
-				<Title>test title</Title>
-			</Container>
+			<Fragment>
+				<Header />
+				<Sidebar />
+				<Container>
+					<Title>test title</Title>
+				</Container>
+			</Fragment>
 		);
 	}
 }

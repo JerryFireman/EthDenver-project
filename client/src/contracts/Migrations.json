@@ -1383,10 +1383,16 @@
       "links": {},
       "address": "0x531d49266EC26c09482c2f9464cd4f34CFd59Bd5",
       "transactionHash": "0x226c55f84ea6cb30ecf2605b1eb1f7b38a8584aae5e3787f152728746e31cd49"
+    },
+    "1581792664912": {
+      "events": {},
+      "links": {},
+      "address": "0x2a53F706bCB36078205AE1599C889Bb557010450",
+      "transactionHash": "0x7f45f5ecc8a8f35c084a7e39ead7e2a1ff9dd5612cbeeba3454c5bcef961d02c"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-15T18:11:11.730Z",
+  "updatedAt": "2020-02-15T18:51:20.895Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

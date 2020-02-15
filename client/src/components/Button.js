@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { ORANGEY_YELLOW, SMALL } from '../constant';
+import { ORANGEY_YELLOW, SMALL } from '../Utils/constant';
 
 export default class Button extends Component {
 	render() {
@@ -30,7 +30,7 @@ const ButtonBase = styled.div`
 `;
 
 const ButtonMain = styled(ButtonBase)`
-	cursor: ${props => props.theme.button.cursor ? props.theme.button.cursor: 'pointer' };
+	cursor: ${(props) => (props.theme.button.cursor ? props.theme.button.cursor : 'pointer')};
 	max-width: ${(props) => (props.width ? `${props.width}px` : '320px')};
 	border: ${(props) => (props.theme.button.borderColor ? `solid 1px ${props.theme.button.borderColor}` : 'none')};
 	background-color: ${(props) => props.theme.button.background};

@@ -11,18 +11,14 @@ import Header from './components/Header';
 import Container from './components/Container';
 import Home from './pages/Home';
 import Modal from './components/Modal';
-import Test from '../../test';
+import Test from './test';
 
 function App() {
 	return (
 		<HashRouter>
 			<Switch>
-				<Header />
-				<Modal />
-				<Container>
-					<Route exact path="/" component={Home} />
-					<Route path="/test" component={Test} />
-				</Container>
+				<Route exact path="/" component={Home} />
+				<Route path="/test" component={Test} />
 			</Switch>
 		</HashRouter>
 	);

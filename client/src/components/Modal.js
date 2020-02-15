@@ -3,15 +3,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import styled from 'styled-components';
 import DialogContent from '@material-ui/core/DialogContent';
-import { connect } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from './Button';
-import { LARGE } from '../constant';
+import { LARGE } from '../Utils/constant';
 
 export default class Modal extends Component {
 	render() {
-		const { logo, message, title, action, disableBackdropClick } = this.props.modalContent;
-
+		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
 		return (
 			<div>
 				<Dialog
@@ -33,13 +30,6 @@ export default class Modal extends Component {
 				>
 					<DialogTitle id="simple-dialog-title">{title ? title : ''}</DialogTitle>
 					<DialogContent>
-						<DialogContentWrapper>
-							{logo === 'Processing' ? (
-								<CircularProgress />
-							) : logo ? (
-								<Image alt="img" src={logo} />
-							) : null}
-						</DialogContentWrapper>
 						<TextWhite>{message}</TextWhite>
 					</DialogContent>
 					<ActionWrapper>
