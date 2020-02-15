@@ -8,6 +8,8 @@ export const DARK_GREY3 = '#25262a';
 export const LIGHT_YELLOW = '#ffc539';
 export const DARK_RED = '#a92b2b';
 export const DUSK = '#415170';
+export const DARK_BLUE = '#29344B';
+export const LIGHT_BLUE = '#D4EFF4';
 
 //fontsize
 export const SMALL = '1rem'; //16px

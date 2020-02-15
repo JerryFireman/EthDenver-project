@@ -6,15 +6,12 @@ export const HEADER_HEIGHT = 74;
 
 export default class Header extends Component {
 	render() {
-		return (
-			<HeaderContainer>
-				<Image alt="img" src={'CWS_Logo.png'} />
-			</HeaderContainer>
-		);
+		return <HeaderContainer>GOOGLE</HeaderContainer>;
 	}
 }
 
 const HeaderContainer = styled.div`
+	position: relative;
 	background: ${DUSK};
 	display: flex;
 	height: ${HEADER_HEIGHT}px;

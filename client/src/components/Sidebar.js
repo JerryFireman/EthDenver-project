@@ -6,24 +6,23 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import GroupIcon from '@material-ui/icons/Group';
-
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CreateIcon from '@material-ui/icons/Create';
 export default class Sidebar extends Component {
 	render() {
 		return (
 			<Wrapper>
 				<List>
-					<ListItem>
-						<ListItemIcon>
-							<GroupIcon />
-						</ListItemIcon>
-						<ListItemText primary={'text1'} />
-					</ListItem>
-					<ListItem>
-						<ListItemIcon>
-							<GroupIcon />
-						</ListItemIcon>
-						<ListItemText primary={'text2'} />
-					</ListItem>
+					{[
+						{ text: 'Create New Groups', icon: <GroupIcon /> },
+						{ text: 'Create Vote', icon: <AddCircleIcon /> },
+						{ text: 'Vote', icon: <CreateIcon /> }
+					].map((item, index) => (
+						<ListItem button key={item.text}>
+							<ListItemIcon>{item.icon}</ListItemIcon>
+							<ListItemText primary={item.text} />
+						</ListItem>
+					))}
 				</List>
 			</Wrapper>
 		);
