@@ -12,7 +12,7 @@ import CreateNewGroupModal from './CreateNewGroupModal';
 
 export default class Sidebar extends Component {
 	state = {
-		isCreateGroupModalOpen: false
+		isCreateGroupModalOpen: true
 	};
 	doSomething = () => {
 		this.setState({ isCreateGroupModalOpen: true });

@@ -4,11 +4,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import styled from 'styled-components';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from './Button';
-import { LARGE } from '../Utils/constant';
+import { LARGE, DUSK } from '../Utils/constant';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 export default class CreateNewGroupModal extends Component {
+	state = {
+		inputArray: [ '123' ]
+	};
+	handleOnClick = () => {};
+	onTextChange = (address, index) => {
+		console.log(address, index);
+	};
+	handleOnAdd = () => {
+		const { inputArray } = this.state;
+		this.setState({ inputArray: inputArray.concat(1) });
+	};
 	render() {
 		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
+		const { inputArray } = this.state;
 		return (
 			<div>
 				<Dialog
@@ -21,22 +34,27 @@ export default class CreateNewGroupModal extends Component {
 					maxWidth={'xs'}
 					PaperProps={{
 						style: {
-							backgroundColor: '#202124',
-							color: '#fff',
-							boxShadow: '10px 10px 20px 0px rgba(0,0,0,0.2)',
-							borderRadius: 15
+							width: '734px',
+							borderRadius: '11px',
+							backgroundColor: DUSK
 						}
 					}}
 				>
-					<DialogTitle id="simple-dialog-title">{title ? title : ''}</DialogTitle>
+					<DialogTitle id="simple-dialog-title">Create New Groups</DialogTitle>
 					<DialogContent>
-						<TextWhite>{message}</TextWhite>
+						<TextWhite>Assign Members</TextWhite>
+						{inputArray.map((item, index) => (
+							<TextInput
+								key={`${item}_${index}`}
+								onChange={({ target }) => this.onTextChange(target.value, index)}
+								placeholder={'0xb4124cEB3451....004d8a28c6eE7'}
+							/>
+						))}
+
+						<AddBoxIcon onClick={this.handleOnAdd} />
 					</DialogContent>
 					<ActionWrapper>
-						{action ? <Button width={150} label={action.okText} handleOnClick={action.okCallback} /> : null}
-						{action && action.CancelText ? (
-							<Button width={150} label={action.CancelText} handleOnClick={closeModal} />
-						) : null}
+						<Button width={150} label={'Create'} handleOnClick={this.handleOnClick} />
 					</ActionWrapper>
 				</Dialog>
 			</div>
@@ -44,11 +62,25 @@ export default class CreateNewGroupModal extends Component {
 	}
 }
 
-const Image = styled.img`width: 40px;`;
+const TextInput = styled.input`
+	height: 51px;
+	background-color: #36435d;
+	border: none;
+	padding: 5px 10px;
+	box-sizing: border-box;
+	width: 100%;
+	caret-color: white;
+	::placeholder {
+		color: rgba(255, 255, 255, 0.3);
+		font-size: 15px;
+	}
+	&:focus {
+		outline: none;
+	}
+`;
 const TextWhite = styled.div`
 	color: white;
 	display: flex;
-	justify-content: center;
 	margin: 50px 0;
 	font-size: ${LARGE};
 `;
