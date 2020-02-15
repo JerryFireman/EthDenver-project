@@ -51,15 +51,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"LogSet\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/crite/Documents/Consensys-Academy/react-box/contracts/SimpleStorage.sol\":\"SimpleStorage\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/crite/Documents/Consensys-Academy/react-box/contracts/SimpleStorage.sol\":{\"keccak256\":\"0x1f0a8e4d4b894a719fc55b7235e57642040b2fd34e0b9fd577bf93c2dd3d85ad\",\"urls\":[\"bzz-raw://a2fec3cd8fd28242ec7912a840c4ac27e39e03a268b33a7ac1502fdd7896f27d\",\"dweb:/ipfs/QmbFtbN5ubCwg7mEZJmHVuy5vFcTe8XmUqtf5qjXUVWP2Y\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50610131806100206000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b606860f3565b6040518082815260200191505060405180910390f35b806000819055507ffa687fbbbd114f405c78850b508cd15ded5f4d9400cf4190a3093b0af68de8c13382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a150565b6000805490509056fea265627a7a723158206e01ad21a139990601a204972b73446532f1ad2e8e6ed7d5ec9a5d3e4e5b753864736f6c634300050c0032",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b606860f3565b6040518082815260200191505060405180910390f35b806000819055507ffa687fbbbd114f405c78850b508cd15ded5f4d9400cf4190a3093b0af68de8c13382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a150565b6000805490509056fea265627a7a723158206e01ad21a139990601a204972b73446532f1ad2e8e6ed7d5ec9a5d3e4e5b753864736f6c634300050c0032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"LogSet\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/jerryfireman/Projects/office-hours-jan-16-2020/contracts/SimpleStorage.sol\":\"SimpleStorage\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jerryfireman/Projects/office-hours-jan-16-2020/contracts/SimpleStorage.sol\":{\"keccak256\":\"0x1f0a8e4d4b894a719fc55b7235e57642040b2fd34e0b9fd577bf93c2dd3d85ad\",\"urls\":[\"bzz-raw://a2fec3cd8fd28242ec7912a840c4ac27e39e03a268b33a7ac1502fdd7896f27d\",\"dweb:/ipfs/QmbFtbN5ubCwg7mEZJmHVuy5vFcTe8XmUqtf5qjXUVWP2Y\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610131806100206000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b606860f3565b6040518082815260200191505060405180910390f35b806000819055507ffa687fbbbd114f405c78850b508cd15ded5f4d9400cf4190a3093b0af68de8c13382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a150565b6000805490509056fea265627a7a72315820fae6197ca17c1c0494e35a911483b785ae2e431c98c3a7af8daa77acd33bfadd64736f6c634300050c0032",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b606860f3565b6040518082815260200191505060405180910390f35b806000819055507ffa687fbbbd114f405c78850b508cd15ded5f4d9400cf4190a3093b0af68de8c13382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a150565b6000805490509056fea265627a7a72315820fae6197ca17c1c0494e35a911483b785ae2e431c98c3a7af8daa77acd33bfadd64736f6c634300050c0032",
   "sourceMap": "34:256:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;34:256:1;;;;;;;",
   "deployedSourceMap": "34:256:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;34:256:1;;;;;;;;;;;;;;;;;;;;;;;;129:85;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;129:85:1;;;;;;;;;;;;;;;;;:::i;:::-;;218:70;;;:::i;:::-;;;;;;;;;;;;;;;;;;;129:85;176:1;163:10;:14;;;;188:21;195:10;207:1;188:21;;;;;;;;;;;;;;;;;;;;;;;;;;;;129:85;:::o;218:70::-;254:4;273:10;;266:17;;218:70;:::o",
   "source": "pragma solidity >=0.4.21 <0.7.0;\n\ncontract SimpleStorage {\n  uint storedData;\n\n  event LogSet(address sender, uint newValue);\n\n  function set(uint x) public {\n    storedData = x;\n    emit LogSet(msg.sender, x);\n  }\n\n  function get() public view returns (uint) {\n    return storedData;\n  }\n}\n",
-  "sourcePath": "C:/Users/crite/Documents/Consensys-Academy/react-box/contracts/SimpleStorage.sol",
+  "sourcePath": "/Users/jerryfireman/Projects/office-hours-jan-16-2020/contracts/SimpleStorage.sol",
   "ast": {
-    "absolutePath": "/C/Users/crite/Documents/Consensys-Academy/react-box/contracts/SimpleStorage.sol",
+    "absolutePath": "/Users/jerryfireman/Projects/office-hours-jan-16-2020/contracts/SimpleStorage.sol",
     "exportedSymbols": {
       "SimpleStorage": [
         91
@@ -471,7 +471,7 @@
     "src": "0:291:1"
   },
   "legacyAST": {
-    "absolutePath": "/C/Users/crite/Documents/Consensys-Academy/react-box/contracts/SimpleStorage.sol",
+    "absolutePath": "/Users/jerryfireman/Projects/office-hours-jan-16-2020/contracts/SimpleStorage.sol",
     "exportedSymbols": {
       "SimpleStorage": [
         91
@@ -913,10 +913,37 @@
       "links": {},
       "address": "0x2db918a6C0C3E2Bd8EC91ED7A6A297457E9F94D2",
       "transactionHash": "0x16fa18bb9ad83385e3774ceac8c4e215237b65d8021162e2a00f943581402eb8"
+    },
+    "1581783961434": {
+      "events": {
+        "0xfa687fbbbd114f405c78850b508cd15ded5f4d9400cf4190a3093b0af68de8c1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "newValue",
+              "type": "uint256"
+            }
+          ],
+          "name": "LogSet",
+          "type": "event",
+          "signature": "0xfa687fbbbd114f405c78850b508cd15ded5f4d9400cf4190a3093b0af68de8c1"
+        }
+      },
+      "links": {},
+      "address": "0xB54723caa39Ab71aAc6360783E764596457C58fc",
+      "transactionHash": "0xfe52d0b9cfe66da84ff75e27c7b61e7841584864d19b70a3ae6669a0d9009f08"
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-01-16T21:51:23.189Z",
+  "updatedAt": "2020-02-15T16:26:18.591Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
