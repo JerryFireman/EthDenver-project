@@ -180,12 +180,25 @@ export default class Test extends Component {
 		this.setState({ voteCount: response.toString() });
 	  }; 
 
-	  splitGroup = async (event) => {
+	  executeVote = async (event) => {
 		event.preventDefault()
 		
 		const { accounts, contract } = this.state;
+		try {
+			const vote = this.state.input == 1 ? true : false;
+			const response = await contract.methods.executeVote(this.state.memberNumber, vote).call();
+		} catch (e) {
+			console.log(e);
+		}
+	  }; 
+
+	  splitGroup = async (event) => {
+		event.preventDefault()
+		var res = [];
+		res.push(1);
+		const { accounts, contract } = this.state;
 		var newGroup = parseInt(this.state.groupNumber);
-		const response = await contract.methods.splitGroup(this.state.groupNumber, this.state.input, newGroup).call();
+		const response = await contract.methods.splitGroup(this.state.groupNumber, res, newGroup).call();
 
 	  }; 
 
@@ -293,6 +306,16 @@ export default class Test extends Component {
 					</label>
 					<button value="Submit" onClick={this.countVotes}>
 						Count Votes{' '}
+					</button>
+				</form>
+
+				<form>
+					<label>
+						Member Number:
+						<input type="text" onChange={this.handleChange} />
+					</label>
+					<button value="Submit" onClick={this.executeVote}>
+						Enter 1 to Vote "Split Group" {' '}
 					</button>
 				</form>
 
