@@ -6,76 +6,51 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from './Button';
 import { LARGE, DUSK } from '../Utils/constant';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import SimpleStorageContract from '../contracts/SimpleStorage.json';
-import getWeb3 from '../getWeb3';
+import { connect } from 'react-redux';
+import { setupGroups } from '../redux/actions';
 
-export default class CreateNewGroupModal extends Component {
+class CreateNewGroupModal extends Component {
 	state = {
-		web3: null, 
-		accounts: null, 
-		contract: null, 
 		inputArray: [ '' ],
 		groupName: [ '' ],
 		input: null,
-		group: "null",
+		group: 'null',
 		groupNumber: null,
 		memberCount: null
 	};
 
-	componentDidMount = async () => {
-		try {
-			// Get network provider and web3 instance.
-			const web3 = await getWeb3();
+	createGroup = async () => {
+		console.log('create group!');
+		// event.preventDefault();
 
-			// Use web3 to get the user's accounts.
-			const accounts = await web3.eth.getAccounts();
-
-			// Get the contract instance.
-			const networkId = await web3.eth.net.getId();
-			const deployedNetwork = SimpleStorageContract.networks[networkId];
-			const instance = new web3.eth.Contract(
-				SimpleStorageContract.abi,
-				deployedNetwork && deployedNetwork.address
-			);
-
-			instance.events.LogSet((error, event) => {
-				console.log(event);
-			});
-
-			// Set web3, accounts, and contract to the state, and then proceed with an
-			// example of interacting with the contract's methods.
-			this.setState({ web3, accounts, contract: instance });
-		} catch (error) {
-			// Catch any errors for any of the above operations.
-			alert(`Failed to load web3, accounts, or contract. Check console for details.`);
-			console.error(error);
-		}
-	};
-
-	createGroup = async (event) => {
-		event.preventDefault()
-		
-		const { accounts, contract } = this.state;
+		const { contract } = this.props;
 		const response = await contract.methods.createGroup(this.state.input, this.state.groupNumber).call();
-	  
+
 		// Update state with the result.
-		this.setState({ groupNumber: response <= this.state.groupNumber ? parseInt(this.state.groupNumber) + 1 : response, groupName: this.state.input });
+		this.setState({
+			groupNumber: response <= this.state.groupNumber ? parseInt(this.state.groupNumber) + 1 : response,
+			groupName: this.state.input
+		});
 	};
 
-	readGroup = async (event) => {
-		event.preventDefault()
-		
-		const { accounts, contract } = this.state;
+	readGroup = async () => {
+		// event.preventDefault();
+
+		const { contract } = this.props;
 		const response = await contract.methods.readGroup(this.state.groupNumber).call();
 	};
 
 	handleOnClick = async () => {
+		const { setupGroups } = this.props;
 		console.log('create group!');
 
-		const { accounts, contract } = this.state;
+		const { contract } = this.props;
 		for (var i = 0; i < this.state.inputArray.length; i++) {
 			try {
-				const response = await contract.methods.joinGroup(this.state.inputArray[i], this.state.groupNumber).call();
+				const response = await contract.methods
+					.joinGroup(this.state.inputArray[i], this.state.groupNumber)
+					.call();
+				setupGroups(response);
 			} catch (e) {
 				console.log(e);
 				break;
@@ -117,16 +92,13 @@ export default class CreateNewGroupModal extends Component {
 	};
 
 	resetModal = () => {
-		this.setState({ 
-			web3: null, 
-			accounts: null, 
-			contract: null, 
+		this.setState({
 			inputArray: [ '' ],
 			groupName: [ '' ],
 			input: null,
-			group: "null",
+			group: 'null',
 			groupNumber: null,
-			memberCount: null 
+			memberCount: null
 		});
 	};
 
@@ -151,9 +123,11 @@ export default class CreateNewGroupModal extends Component {
 						}
 					}}
 				>
-					<DialogTitle id="simple-dialog-title" ><span style={{color: 'white'}}>Create New Group</span></DialogTitle>
+					<DialogTitle id="simple-dialog-title">
+						<span style={{ color: 'white' }}>Create New Group</span>
+					</DialogTitle>
 					<DialogContent>
-					<TextWhite>Group Name: {this.state.group == "null" ? "" : this.state.group}</TextWhite>
+						<TextWhite>Group Name: {this.state.group == 'null' ? '' : this.state.group}</TextWhite>
 						{groupName.map((item, index) => (
 							<TextInput
 								value={item}
@@ -174,13 +148,36 @@ export default class CreateNewGroupModal extends Component {
 						<AddBoxIcon onClick={this.handleOnAdd} />
 					</DialogContent>
 					<ActionWrapper>
-						<Button width={150} label={'Create'} handleOnClick={this.handleOnClick && this.createGroup && closeModal} />
+						<Button
+							width={150}
+							label={'Create'}
+							handleOnClick={() => {
+								this.handleOnClick();
+								this.createGroup();
+								closeModal();
+							}}
+						/>
 					</ActionWrapper>
 				</Dialog>
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+	console.log(state);
+	return {
+		web3: state.common.web3,
+		accounts: state.common.accounts,
+		contract: state.common.contract
+	};
+};
+
+const mapDispatchToProps = {
+	setupGroups
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNewGroupModal);
 
 const TextInput = styled.input`
 	height: 51px;

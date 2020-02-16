@@ -6,18 +6,14 @@ class Tree extends Component {
 	state = {
 		groupNumber: 0
 	};
-	// componentDidMount = () => {
-	// 	const { web3 } = this.props;
-	// 	console.log('web3 tree', web3);
-	// 	this.readGroup();
-	// };
 
 	componentDidUpdate(prevProps) {
-		const { web3 } = this.props;
+		const { web3, groups } = this.props;
 		// Typical usage (don't forget to compare props):
-		if (web3) {
+		if ((!prevProps.web3 && web3) || prevProps.groups !== groups) {
 			console.log('readgroup!!!');
 			this.readGroup();
+			this.readMemberListInGroup();
 		}
 	}
 
@@ -32,19 +28,18 @@ class Tree extends Component {
 	readMember = async (event) => {
 		event.preventDefault();
 
-		const { accounts, contract } = this.props.common;
+		const { accounts, contract } = this.props;
 		const response = await contract.methods.readMember(this.state.input).call();
 
 		this.setState({ member: response });
 	};
 
-	readMemberListInGroup = async (event) => {
-		event.preventDefault();
-
-		const { accounts, contract } = this.props.common;
-		const response = await contract.methods.readMemberListInGroup(this.state.input).call();
+	readMemberListInGroup = async () => {
+		const { accounts, contract } = this.props;
+		const response = await contract.methods.readMemberListInGroup(this.state.groupNumber).call();
 
 		this.setState({ groupMembers: response });
+		console.log('tree member in group!', response);
 	};
 	render() {
 		return (
@@ -74,7 +69,8 @@ const mapStateToProps = (state) => {
 	return {
 		web3: state.common.web3,
 		accounts: state.common.accounts,
-		contract: state.common.contract
+		contract: state.common.contract,
+		groups: state.common.groups
 	};
 };
 
