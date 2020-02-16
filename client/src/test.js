@@ -99,7 +99,7 @@ export default class Test extends Component {
 	  createGroup = async (event) => {
 		event.preventDefault()
 		
-		const contract = this.state;
+		const { accounts, contract } = this.state;
 		const response = await contract.methods.createGroup(this.state.input, this.state.groupNumber).call();
 	  
 		// Update state with the result.
@@ -109,14 +109,14 @@ export default class Test extends Component {
 	  joinGroup = async (event) => {
 		event.preventDefault()
 		
-		const contract = this.state;
+		const { accounts, contract } = this.state;
 		const response = await contract.methods.joinGroup(this.state.input, this.state.groupNumber).call();
 	  };
 	  
 	  readGroup = async (event) => {
 		event.preventDefault()
 		
-		const contract = this.state;
+		const { accounts, contract } = this.state;
 		const response = await contract.methods.readGroup(this.state.input).call();
 
 		var currGroup = [];
@@ -132,7 +132,7 @@ export default class Test extends Component {
 	  readMember = async (event) => {
 		event.preventDefault()
 		
-		const contract = this.state;
+		const { accounts, contract } = this.state;
 		const response = await contract.methods.readMember(this.state.input).call();
 	  
 		var currMember = [];
@@ -146,7 +146,7 @@ export default class Test extends Component {
 	  readMemberListInGroup = async (event) => {
 		event.preventDefault()
 		
-		const contract = this.state;
+		const { accounts, contract } = this.state;
 		const response = await contract.methods.readMemberListInGroup(this.state.input).call();
 	  
 		// Update state with the result.
@@ -163,7 +163,7 @@ export default class Test extends Component {
 	  readMemberVote = async (event) => {
 		event.preventDefault()
 		
-		const contract = this.state;
+		const { accounts, contract } = this.state;
 		const response = await contract.methods.readMemberVote(this.state.input).call();
 	  
 		// Update state with the result.
@@ -173,7 +173,7 @@ export default class Test extends Component {
 	  countVotes = async (event) => {
 		event.preventDefault()
 		
-		const contract = this.state;
+		const { accounts, contract } = this.state;
 		const response = await contract.methods.countVotes(this.state.input).call();
 	  
 		// Update state with the result.
@@ -183,7 +183,7 @@ export default class Test extends Component {
 	  splitGroup = async (event) => {
 		event.preventDefault()
 		
-		const contract = this.state;
+		const { accounts, contract } = this.state;
 		var newGroup = parseInt(this.state.groupNumber);
 		const response = await contract.methods.splitGroup(this.state.groupNumber, this.state.input, newGroup).call();
 
