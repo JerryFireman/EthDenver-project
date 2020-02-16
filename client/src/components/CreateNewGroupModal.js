@@ -17,7 +17,8 @@ export default class CreateNewGroupModal extends Component {
 		inputArray: [ '' ],
 		input: null,
 		group: null,
-		groupNumber: null
+		groupNumber: null,
+		memberCount: null
 	};
 
 	componentDidMount = async () => {
@@ -58,7 +59,23 @@ export default class CreateNewGroupModal extends Component {
 	  
 		// Update state with the result.
 		this.setState({ groupNumber: response <= this.state.groupNumber ? parseInt(this.state.groupNumber) + 1 : response, groupName: this.state.input });
-	  };
+	};
+
+	readGroup = async (event) => {
+		event.preventDefault()
+		
+		const { accounts, contract } = this.state;
+		const response = await contract.methods.readGroup(this.state.input).call();
+
+		var currGroup = [];
+		currGroup.push({"groupNumber": response[0].toString()});
+		currGroup.push({"subGroupOf": response[1].toString()});
+		currGroup.push({"name": this.state.groupName.toString()});
+		currGroup.push({"memberCount": this.state.memberCount});
+
+		// Update state with the result.
+		this.setState({ group: JSON.stringify(currGroup)});
+	};
 
 	handleOnClick = async () => {
 		console.log('create group!');
@@ -83,7 +100,7 @@ export default class CreateNewGroupModal extends Component {
 
 	handleOnAdd = () => {
 		const { inputArray } = this.state;
-		this.setState({ inputArray: inputArray.concat('') });
+		this.setState({ inputArray: inputArray.concat(''), memberCount: parseInt(this.state.memberCount) + 1 });
 	};
 
 	handleChange = async (e) => {
