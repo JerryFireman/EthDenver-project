@@ -9,30 +9,42 @@ import GroupIcon from '@material-ui/icons/Group';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CreateIcon from '@material-ui/icons/Create';
 import CreateNewGroupModal from './CreateNewGroupModal';
+import CreateVote from './CreateVote';
 
 export default class Sidebar extends Component {
 	state = {
-		isCreateGroupModalOpen: true
+		activeIndex: 0,
+		menu: [
+			{ text: 'Create New Groups', icon: <GroupIcon />, isOpen: false },
+			{ text: 'Create Vote', icon: <AddCircleIcon />, isOpen: false },
+			{ text: 'Vote', icon: <CreateIcon />, isOpen: false }
+		]
 	};
-	doSomething = () => {
-		this.setState({ isCreateGroupModalOpen: true });
+	active = (index) => {
+		const { menu, activeIndex } = this.state;
+		console.log('index', index);
+		console.log('activeIndex', activeIndex);
+		let newMenu = menu;
+		newMenu[index]['isOpen'] = true;
+		this.setState({ menu: newMenu, activeIndex: index });
 	};
-	onClose = () => {
-		this.setState({ isCreateGroupModalOpen: false });
+	onClose = (index) => {
+		console.log('index', index);
+		const { menu } = this.state;
+		let newMenu = menu;
+		newMenu[index]['isOpen'] = false;
+		this.setState({ menu: newMenu });
 	};
 	//closeModal, showModal, action, message, title, disableBackdropClick
 	render() {
-		const { isCreateGroupModalOpen } = this.state;
+		const { menu, activeIndex } = this.state;
 		return (
 			<Wrapper>
-				<CreateNewGroupModal showModal={isCreateGroupModalOpen} closeModal={this.onClose} />
+				<CreateNewGroupModal showModal={menu[0].isOpen} closeModal={() => this.onClose(activeIndex)} />
+				<CreateVote showModal={menu[1].isOpen} closeModal={() => this.onClose(activeIndex)} />
 				<List>
-					{[
-						{ text: 'Create New Groups', icon: <GroupIcon /> },
-						{ text: 'Create Vote', icon: <AddCircleIcon /> },
-						{ text: 'Vote', icon: <CreateIcon /> }
-					].map((item, index) => (
-						<ListItem onClick={this.doSomething} button key={item.text}>
+					{menu.map((item, index) => (
+						<ListItem key={item.text} onClick={() => this.active(index)} button key={item.text}>
 							<ListItemIcon>{item.icon}</ListItemIcon>
 							<ListItemText primary={item.text} />
 						</ListItem>
