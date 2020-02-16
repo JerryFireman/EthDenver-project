@@ -6,27 +6,23 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from './Button';
 import { LARGE, DUSK } from '../Utils/constant';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import SplitGroup from './SplitGroup';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 
-export default class CreateVote extends Component {
+export default class SplitGroup extends Component {
 	state = {
-		inputArray: [ '' ],
-		isSplitGroupOpen: false,
-		isMergeGroupOpen: false
+		selectedGroup: null
 	};
-	handleSplitGroupOnClick = () => {
-		this.setState({ isSplitGroupOpen: true });
+	handleChange = (event) => {
+		this.setState({ selectedGroup: event.target.value });
 	};
-	handleMergeGroupOnClick = () => {
-		this.setState({ isMergeGroupOpen: true });
-	};
-
 	render() {
 		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
-		const { isSplitGroupOpen } = this.state;
+		const { inputArray } = this.state;
 		return (
 			<div>
-				<SplitGroup showModal={isSplitGroupOpen} />
 				<Dialog
 					// disableBackdropClick={true}
 					aria-describedby="alert-dialog-description"
@@ -43,11 +39,26 @@ export default class CreateVote extends Component {
 						}
 					}}
 				>
-					<DialogTitle id="simple-dialog-title">Create New Groups</DialogTitle>
+					<DialogTitle id="simple-dialog-title">New Vote</DialogTitle>
 					<DialogContent>
-						<Button blue width={150} label={'Split Group'} handleOnClick={this.handleSplitGroupOnClick} />
-						<Button blue width={150} label={'Merge Group'} handleOnClick={this.handleMergeGroupOnClick} />
+						<TextWhite>Split Group</TextWhite>
+						<FormControl>
+							<InputLabel id="demo-simple-select-label">Age</InputLabel>
+							<Select
+								labelId="demo-simple-select-label"
+								id="demo-simple-select"
+								value={'age'}
+								onChange={this.handleChange}
+							>
+								<MenuItem value={10}>Ten</MenuItem>
+								<MenuItem value={20}>Twenty</MenuItem>
+								<MenuItem value={30}>Thirty</MenuItem>
+							</Select>
+						</FormControl>
 					</DialogContent>
+					<ActionWrapper>
+						<Button width={150} label={'Create'} handleOnClick={this.handleOnClick} />
+					</ActionWrapper>
 				</Dialog>
 			</div>
 		);
