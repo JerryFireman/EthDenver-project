@@ -12,6 +12,8 @@ import Sidebar from './components/Sidebar.js';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { LARGE } from './Utils/constant.js';
+import Tree from './components/Tree.js';
+import 'treeflex/dist/css/treeflex.css';
 
 class Test extends Component {
 	constructor(props) {
@@ -63,6 +65,7 @@ class Test extends Component {
 			// Set web3, accounts, and contract to the state, and then proceed with an
 			// example of interacting with the contract's methods.
 			this.setState({ web3, accounts, contract: instance });
+			this.buildTreeStructure();
 		} catch (error) {
 			// Catch any errors for any of the above operations.
 			alert(`Failed to load web3, accounts, or contract. Check console for details.`);
@@ -221,32 +224,48 @@ class Test extends Component {
 			.send({ from: accounts[0] });
 	};
 
-+       buildTreeStructure = async () => {
-+               const { accounts, contract } = this.state;
-+               const numGroups = this.state.groupNumber;
-+               const treeGroups = [];
-+               for (var i = 1; i <= numGroups; i++) {
-+                       const currGroup = await contract.methods.readMemberListInGroup(i).call();
-+                       const currGroupMembers = [];
-+                       for (var j = 1; j <= currGroup.length; j++) {
-+                               const currMember = await contract.methods.readMember(j).call();
-+                               currGroupMembers.push(currMember);
-+                       }
-+                       treeGroups.push(currGroupMembers);
-+               }
-+               console.log(treeGroups);
-+               this.setState({ tree: treeGroups.toString() });
-+       }
+	buildTreeStructure = async () => {
+		const { accounts, contract } = this.state;
+		const numGroups = this.state.groupNumber;
+		const treeGroups = [];
+		for (var i = 1; i <= numGroups; i++) {
+			const currGroup = await contract.methods.readMemberListInGroup(i).call();
+			const currGroupMembers = [];
+			for (var j = 1; j <= currGroup.length; j++) {
+				const currMember = await contract.methods.readMember(j).call();
+				currGroupMembers.push(currMember);
+			}
+			treeGroups.push(currGroupMembers);
+		}
+		console.log('treeGroups', treeGroups);
+		// for (const property in treeGroups[0]) {
+		// 	console.log(`${property}: ${treeGroups[property]}`);
+		// }
+		this.setState({ tree: treeGroups });
+		// this.renderTree();
+	};
 
 	handleChange = async (e) => {
 		//e.preventDefault()
 		console.log(e.target.value);
 		this.setState({ input: e.target.value });
 	};
+	// renderTree = () => {
+	// 	const { tree } = this.state;
+	// 	for (const property in tree) {
+	// 		console.log(`${property}: ${tree[property]}`);
+	// 		for (const x in property) {
+	// 			console.log(`${x}: ${property['2']}`);
+	// 		}
+	// 	}
+	// };
 
 	render() {
 		const { currentActiveTab } = this.props;
+		const { tree } = this.state;
 		console.log('currentActiveTab', currentActiveTab);
+		console.log('tree', tree);
+		console.log('type', typeof tree);
 		if (!this.state.web3) {
 			return <div>Loading Web3, accounts, and contract...</div>;
 		}
@@ -274,6 +293,7 @@ class Test extends Component {
 
 							{currentActiveTab === 0 && (
 								<Fragment>
+									<button onClick={() => this.buildTreeStructure()}>tree structure</button>
 									<Wrapper2>
 										<TextWhite>Group Name:</TextWhite>
 										<TextInput onChange={this.handleChange} placeholder={'e.g. Backend'} />
@@ -344,7 +364,7 @@ class Test extends Component {
 								<Fragment>
 									<Wrapper2>
 										<TextWhite>Member Name:</TextWhite>
-										<TextInput onChange={this.handleChange} placeholder={'e.g. 0'} />
+										<TextInput onChange={this.handleChange} placeholder={''} />
 
 										<Button variant="contained" onClick={this.createMember}>
 											Create Member
@@ -359,6 +379,27 @@ class Test extends Component {
 											Read Group Member List
 										</Button>
 									</Wrapper2>
+								</Fragment>
+							)}
+							{currentActiveTab === 4 && (
+								<Fragment>
+									{/* <Tree /> */}
+									<div>
+										<div className="tf-tree">
+											<ul>
+												<li>
+													<span className="tf-nc">1</span>
+													<ul>
+														{/* {tree.map((x, index) => (
+															<li key={index}>
+																<span className="tf-nc">{x['2']}</span>
+															</li>
+														))} */}
+													</ul>
+												</li>
+											</ul>
+										</div>
+									</div>
 								</Fragment>
 							)}
 						</div>
