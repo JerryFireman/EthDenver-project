@@ -19,6 +19,7 @@ const HeaderContainer = styled.div`
 	padding-left: 20px;
 	box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.5);
 	color: white;
+	z-index: 1000;
 `;
 
 const Image = styled.img`width: 100px;`;

@@ -9,3 +9,8 @@ export const setupGroups = (payload) => ({
 	type: types.SETUP_GROUPS,
 	payload
 });
+
+export const setupTab = (payload) => ({
+	type: types.SETUP_TAB,
+	payload
+});

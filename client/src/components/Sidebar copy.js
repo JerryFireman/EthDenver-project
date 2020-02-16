@@ -8,11 +8,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import GroupIcon from '@material-ui/icons/Group';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CreateIcon from '@material-ui/icons/Create';
+import CreateNewGroupModal from './CreateNewGroupModal';
+import CreateVote from './CreateVote';
 import ChatBox from '3box-chatbox-react';
 import { Route } from 'react-router-dom';
 import Box from '3box';
-import { setupTab } from '../redux/actions';
-import { connect } from 'react-redux';
+import VoteModal from './VoteModal';
 
 export default class Sidebar extends Component {
 	state = {
@@ -70,6 +71,13 @@ export default class Sidebar extends Component {
 		const { menu, activeIndex } = this.state;
 		return (
 			<Wrapper>
+				<CreateNewGroupModal showModal={menu[0].isOpen} closeModal={() => this.onClose(activeIndex)} treeGroup={this.props.treeGroup} groupArray={this.props.groupArray} />
+				<CreateVote
+					closeCreateVote={() => this.closeCreateVote()}
+					showModal={menu[1].isOpen}
+					closeModal={() => this.onClose(activeIndex)}
+				/>
+				<VoteModal showModal={menu[2].isOpen} closeVote={() => this.closeCreateVoteModal()} />
 				<List>
 					{menu.map((item, index) => (
 						<ListItem key={item.text} onClick={() => this.active(index)} button key={item.text}>

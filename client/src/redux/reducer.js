@@ -6,7 +6,8 @@ const initialState = {
 	accounts: null,
 	contract: null,
 	groups: null,
-	totalNumberOfGroups: 0
+	totalNumberOfGroups: 0,
+	currentActiveTab: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,12 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				totalNumberOfGroups: action.payload
+			};
+		case types.SETUP_TAB:
+			console.log('tab!!', action.payload);
+			return {
+				...state,
+				currentActiveTab: action.payload
 			};
 		default:
 			return state;

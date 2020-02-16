@@ -33,6 +33,7 @@ class CreateNewGroupModal extends Component {
 		this.setState({
 			groupNumber: response <= this.state.groupNumber ? parseInt(this.state.groupNumber) + 1 : response
 		});
+		this.readGroup();
 	};
 
 	readGroup = async () => {
@@ -40,6 +41,7 @@ class CreateNewGroupModal extends Component {
 
 		const { contract } = this.props;
 		const response = await contract.methods.readGroup(this.state.groupNumber).call();
+		console.log('readGroup', response);
 		return response;
 	};
 

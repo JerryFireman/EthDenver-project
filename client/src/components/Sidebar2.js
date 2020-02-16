@@ -8,13 +8,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 import GroupIcon from '@material-ui/icons/Group';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CreateIcon from '@material-ui/icons/Create';
+import CreateNewGroupModal from './CreateNewGroupModal';
+import CreateVote from './CreateVote';
 import ChatBox from '3box-chatbox-react';
 import { Route } from 'react-router-dom';
 import Box from '3box';
+import VoteModal from './VoteModal';
 import { setupTab } from '../redux/actions';
 import { connect } from 'react-redux';
 
-export default class Sidebar extends Component {
+class Sidebar2 extends Component {
 	state = {
 		activeIndex: 0,
 		menu: [
@@ -68,11 +71,12 @@ export default class Sidebar extends Component {
 
 	render() {
 		const { menu, activeIndex } = this.state;
+		const { setupTab } = this.props;
 		return (
 			<Wrapper>
 				<List>
 					{menu.map((item, index) => (
-						<ListItem key={item.text} onClick={() => this.active(index)} button key={item.text}>
+						<ListItem key={item.text} onClick={() => setupTab(index)} button key={item.text}>
 							<ListItemIcon>{item.icon}</ListItemIcon>
 							<ListItemText primary={item.text} />
 						</ListItem>
@@ -96,6 +100,12 @@ export default class Sidebar extends Component {
 		);
 	}
 }
+
+const mapDispatchToProps = {
+	setupTab
+};
+
+export default connect(null, mapDispatchToProps)(Sidebar2);
 
 const Wrapper = styled.div`
 	width: 324px;

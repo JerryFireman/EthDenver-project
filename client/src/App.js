@@ -22,8 +22,8 @@ function App() {
 			<Switch>
 				<Provider store={store}>
 					<InitWeb3Component />
-					<Route exact path="/" component={Home} />
-					<Route path="/test" component={Test} />
+					<Route exact path="/test" component={Home} />
+					<Route path="/" component={Test} />
 				</Provider>
 			</Switch>
 		</HashRouter>
