@@ -15,8 +15,9 @@ export default class CreateNewGroupModal extends Component {
 		accounts: null, 
 		contract: null, 
 		inputArray: [ '' ],
+		groupName: [ '' ],
 		input: null,
-		group: null,
+		group: "null",
 		groupNumber: null,
 		memberCount: null
 	};
@@ -65,16 +66,7 @@ export default class CreateNewGroupModal extends Component {
 		event.preventDefault()
 		
 		const { accounts, contract } = this.state;
-		const response = await contract.methods.readGroup(this.state.input).call();
-
-		var currGroup = [];
-		currGroup.push({"groupNumber": response[0].toString()});
-		currGroup.push({"subGroupOf": response[1].toString()});
-		currGroup.push({"name": this.state.groupName.toString()});
-		currGroup.push({"memberCount": this.state.memberCount});
-
-		// Update state with the result.
-		this.setState({ group: JSON.stringify(currGroup)});
+		const response = await contract.methods.readGroup(this.state.groupNumber).call();
 	};
 
 	handleOnClick = async () => {
@@ -89,6 +81,8 @@ export default class CreateNewGroupModal extends Component {
 				break;
 			}
 		}
+		var group = [];
+		group.push(this.state.group.toString());
 	};
 
 	onTextChange = (address, index) => {
@@ -98,9 +92,18 @@ export default class CreateNewGroupModal extends Component {
 		this.setState({ inputArray: newInputArray });
 	};
 
+	onNameChange = (name, index) => {
+		const { groupName } = this.state;
+		let newName = groupName;
+		newName[index] = name;
+		this.setState({ groupName: newName, group: name });
+		Object.assign(this.props.treeGroup, groupName);
+	};
+
 	handleOnAdd = () => {
 		const { inputArray } = this.state;
 		this.setState({ inputArray: inputArray.concat(''), memberCount: parseInt(this.state.memberCount) + 1 });
+		Object.assign(this.props.groupArray, this.state.inputArray);
 	};
 
 	handleChange = async (e) => {
@@ -115,7 +118,7 @@ export default class CreateNewGroupModal extends Component {
 
 	render() {
 		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
-		const { inputArray } = this.state;
+		const { inputArray, groupName } = this.state;
 		return (
 			<div>
 				<Dialog
@@ -136,11 +139,15 @@ export default class CreateNewGroupModal extends Component {
 				>
 					<DialogTitle id="simple-dialog-title" ><span style={{color: 'white'}}>Create New Group</span></DialogTitle>
 					<DialogContent>
-					<TextWhite>Group Name: {this.state.group}</TextWhite>
-						<TextInput
-							onChange={this.updateGroup}
-							placeholder={'e.g. company name'}
-						/>
+					<TextWhite>Group Name: {this.state.group == "null" ? "" : this.state.group}</TextWhite>
+						{groupName.map((item, index) => (
+							<TextInput
+								value={item}
+								key={index}
+								onChange={({ target }) => this.onNameChange(target.value, index) && this.updateGroup}
+								placeholder={'e.g. company name'}
+							/>
+						))}
 						<TextWhite>Assign Members</TextWhite>
 						{inputArray.map((item, index) => (
 							<TextInput
