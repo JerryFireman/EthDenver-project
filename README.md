@@ -1,5 +1,4 @@
 # DAOmocracy
-
 ## About Project
 DAOmocracy is a platform that makes organizations more democratic by allowing members to determine the structure of their group through voting. Serving as a DAO that has a nested structure which can change over time, it enables companies and non-profits to have digital presences that better reflect the needs and desires of their employees as they adapt and grow. Through providing a flexible structure for groups, DAOmocracy lets workers gain more control and power over how they work and interact together.
 
@@ -53,5 +52,8 @@ const instance = new web3.eth.Contract(
 	deployedNetwork && deployedNetwork.address
 );
 ```
-
 ## Features
+* Create, split, and merge groups in DAO
+* Permissioned group messaging with 3Box
+* Dynamic tree diagram of DAO structures
+* Y/N split and merge voting for members
