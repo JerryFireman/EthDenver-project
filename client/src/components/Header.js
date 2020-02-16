@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { DUSK } from '../Utils/constant';
+import ProfileHover from 'profile-hover';
 
 export const HEADER_HEIGHT = 74;
 
 export default class Header extends Component {
 	render() {
-		return <HeaderContainer>DAOmocracy</HeaderContainer>;
+		return <HeaderContainer>DAOmocracy<span>&nbsp;&nbsp;</span>
+				<ProfileHover address={'0xa8ee0babe72cd9a80ae45dd74cd3eae7a82fd5d0'} tileStyle={false}/></HeaderContainer>
 	}
 }
 
