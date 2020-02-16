@@ -36,7 +36,8 @@ class Test extends Component {
 		member: null,
 		groupMembers: null,
 		memberVote: null,
-		voteCount: null
+		voteCount: null,
+		tree: null
 	};
 
 	componentDidMount = async () => {
@@ -219,6 +220,23 @@ class Test extends Component {
 			.splitGroup(this.state.groupNumber, res, newGroup)
 			.send({ from: accounts[0] });
 	};
+
++       buildTreeStructure = async () => {
++               const { accounts, contract } = this.state;
++               const numGroups = this.state.groupNumber;
++               const treeGroups = [];
++               for (var i = 1; i <= numGroups; i++) {
++                       const currGroup = await contract.methods.readMemberListInGroup(i).call();
++                       const currGroupMembers = [];
++                       for (var j = 1; j <= currGroup.length; j++) {
++                               const currMember = await contract.methods.readMember(j).call();
++                               currGroupMembers.push(currMember);
++                       }
++                       treeGroups.push(currGroupMembers);
++               }
++               console.log(treeGroups);
++               this.setState({ tree: treeGroups.toString() });
++       }
 
 	handleChange = async (e) => {
 		//e.preventDefault()
