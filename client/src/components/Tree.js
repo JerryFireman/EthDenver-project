@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import 'treeflex/dist/css/treeflex.css';
 export default class Tree extends Component {
+	state = { 		
+	 };
+
+	 componentDidMount = async () => {
+
+		console.log(this.props.groupArray);
+		console.log(this.props.treeGroup);
+	};
 	render() {
 		return (
 			<div>

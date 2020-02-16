@@ -41,13 +41,24 @@ const main = {
 };
 
 export default class Home extends Component {
+	state = {
+		groupArray: [ '' ],
+		treeGroup: [ '' ]
+	};
+
+	componentDidMount = async () => {
+
+			console.log(this.state.groupArray);
+			console.log(this.state.treeGroup);
+	};
+
 	render() {
 		return (
 			<Fragment>
 				<Header />
 				<Container>
-					<Sidebar />
-					<Tree />
+					<Sidebar treeGroup={this.state.treeGroup} groupArray={this.state.groupArray}/>
+					<Tree treeGroup={this.state.treeGroup} groupArray={this.state.groupArray}/>
 				</Container>
 			</Fragment>
 		);
