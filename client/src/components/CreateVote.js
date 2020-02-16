@@ -7,6 +7,7 @@ import Button from './Button';
 import { LARGE, DUSK } from '../Utils/constant';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import SplitGroup from './SplitGroup';
+import MergeGroup from './MergeGroup';
 
 export default class CreateVote extends Component {
 	state = {
@@ -23,6 +24,9 @@ export default class CreateVote extends Component {
 	setSplitGroupVisibility = (isOpen) => {
 		this.setState({ isSplitGroupOpen: isOpen });
 	};
+	setMergeGroupVisibility = (isOpen) => {
+		this.setState({ isMergeGroupOpen: isOpen });
+	};
 	handleMergeGroupOnClick = () => {
 		const { closeCreateVote } = this.props;
 		this.setState({ isMergeGroupOpen: true });
@@ -31,12 +35,16 @@ export default class CreateVote extends Component {
 
 	render() {
 		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
-		const { isSplitGroupOpen } = this.state;
+		const { isSplitGroupOpen, isMergeGroupOpen } = this.state;
 		return (
 			<div>
 				<SplitGroup
 					setSplitGroupVisibility={(isOpen) => this.setSplitGroupVisibility(isOpen)}
 					showModal={isSplitGroupOpen}
+				/>
+				<MergeGroup
+					setMergeGroupVisibility={(isOpen) => this.setMergeGroupVisibility(isOpen)}
+					showModal={isMergeGroupOpen}
 				/>
 				<Dialog
 					// disableBackdropClick={true}
