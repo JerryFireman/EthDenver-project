@@ -12,6 +12,7 @@ import Sidebar from './components/Sidebar.js';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { LARGE } from './Utils/constant.js';
+import ProfileHover from 'profile-hover';
 
 class Test extends Component {
 	constructor(props) {
@@ -221,22 +222,22 @@ class Test extends Component {
 			.send({ from: accounts[0] });
 	};
 
-+       buildTreeStructure = async () => {
-+               const { accounts, contract } = this.state;
-+               const numGroups = this.state.groupNumber;
-+               const treeGroups = [];
-+               for (var i = 1; i <= numGroups; i++) {
-+                       const currGroup = await contract.methods.readMemberListInGroup(i).call();
-+                       const currGroupMembers = [];
-+                       for (var j = 1; j <= currGroup.length; j++) {
-+                               const currMember = await contract.methods.readMember(j).call();
-+                               currGroupMembers.push(currMember);
-+                       }
-+                       treeGroups.push(currGroupMembers);
-+               }
-+               console.log(treeGroups);
-+               this.setState({ tree: treeGroups.toString() });
-+       }
+	buildTreeStructure = async () => {
+		const { accounts, contract } = this.state;
+		const numGroups = this.state.groupNumber;
+		const treeGroups = [];
+		for (var i = 1; i <= numGroups; i++) {
+			const currGroup = await contract.methods.readMemberListInGroup(i).call();
+			const currGroupMembers = [];
+				for (var j = 1; j <= currGroup.length; j++) {
+					const currMember = await contract.methods.readMember(j).call();
+					currGroupMembers.push(currMember);
+				}
+			treeGroups.push(currGroupMembers);
+		}
+		console.log(treeGroups);
+		//this.setState({ tree: treeGroups.toString() });
+	}
 
 	handleChange = async (e) => {
 		//e.preventDefault()
@@ -257,6 +258,7 @@ class Test extends Component {
 					<Sidebar2 />
 					<Wrapper>
 						<div className="App">
+							<div><br></br></div>
 							<div>Group name: {this.state.groupName}</div>
 							<div>Group number: {this.state.groupNumber}</div>
 							<div>Member name: {this.state.memberName}</div>
