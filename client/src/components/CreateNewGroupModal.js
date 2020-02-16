@@ -108,7 +108,6 @@ export default class CreateNewGroupModal extends Component {
 		this.setState({ input: e.target.value });
 	};
 
-
 	updateGroup = async (e) => {
 		console.log(e.target.value);
 		this.setState({ group: e.target.value });
