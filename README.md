@@ -5,12 +5,12 @@ DAOmocracy is a platform that makes organizations more democratic by allowing me
 ## How to Run
 ```console
 foo@bar:~$ ganache-cli
-foo@bar:~$ cd ./<DAOmocracy>
-foo@bar:DAOmocracy$ truffle compile
-foo@bar:DAOmocracy$ truffle migrate
-foo@bar:DAOmocracy$ cd client
-foo@bar:DAOmocracy/client$ npm install
-foo@bar:DAOmocracy/client$ npm start
+foo@bar:~$ cd ./<EthDenver-project>
+foo@bar:EthDenver-project$ truffle compile
+foo@bar:EthDenver-project$ truffle migrate
+foo@bar:EthDenver-project$ cd client
+foo@bar:EthDenver-project/client$ npm install
+foo@bar:EthDenver-project/client$ npm start
 ```
 
 ## Technological Overview
