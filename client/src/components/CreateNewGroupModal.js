@@ -13,23 +13,25 @@ class CreateNewGroupModal extends Component {
 	state = {
 		inputArray: [ '' ],
 		groupName: [ '' ],
-		input: null,
 		group: 'null',
-		groupNumber: null,
+		groupNumber: 0,
 		memberCount: null
 	};
 
 	createGroup = async () => {
+		const { setupGroups } = this.props;
 		console.log('create group!');
+		console.log('this.state.groupNumber', this.state.groupNumber);
 		// event.preventDefault();
 
 		const { contract } = this.props;
-		const response = await contract.methods.createGroup(this.state.input, this.state.groupNumber).call();
-
+		// return total number of groups
+		const response = await contract.methods.createGroup('test', this.state.groupNumber).call();
+		console.log('total number of groups', response);
+		setupGroups(response);
 		// Update state with the result.
 		this.setState({
-			groupNumber: response <= this.state.groupNumber ? parseInt(this.state.groupNumber) + 1 : response,
-			groupName: this.state.input
+			groupNumber: response <= this.state.groupNumber ? parseInt(this.state.groupNumber) + 1 : response
 		});
 	};
 
@@ -38,10 +40,10 @@ class CreateNewGroupModal extends Component {
 
 		const { contract } = this.props;
 		const response = await contract.methods.readGroup(this.state.groupNumber).call();
+		return response;
 	};
 
 	handleOnClick = async () => {
-		const { setupGroups } = this.props;
 		console.log('create group!');
 
 		const { contract } = this.props;
@@ -50,7 +52,6 @@ class CreateNewGroupModal extends Component {
 				const response = await contract.methods
 					.joinGroup(this.state.inputArray[i], this.state.groupNumber)
 					.call();
-				setupGroups(response);
 			} catch (e) {
 				console.log(e);
 				break;
@@ -127,7 +128,7 @@ class CreateNewGroupModal extends Component {
 						<span style={{ color: 'white' }}>Create New Group</span>
 					</DialogTitle>
 					<DialogContent>
-						<TextWhite>Group Name: {this.state.group == 'null' ? '' : this.state.group}</TextWhite>
+						<TextWhite>Group Name: </TextWhite>
 						{groupName.map((item, index) => (
 							<TextInput
 								value={item}

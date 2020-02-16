@@ -5,7 +5,8 @@ const initialState = {
 	web3: null,
 	accounts: null,
 	contract: null,
-	groups: null
+	groups: null,
+	totalNumberOfGroups: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,7 +22,7 @@ const reducer = (state = initialState, action) => {
 			console.log('reducer group', action.payload);
 			return {
 				...state,
-				groups: action.payload
+				totalNumberOfGroups: action.payload
 			};
 		default:
 			return state;
