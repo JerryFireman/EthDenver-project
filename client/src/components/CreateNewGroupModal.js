@@ -134,7 +134,6 @@ export default class CreateNewGroupModal extends Component {
 								placeholder={'0xb4124cEB3451....004d8a28c6eE7'}
 							/>
 						))}
-
 						<AddBoxIcon onClick={this.handleOnAdd} />
 					</DialogContent>
 					<ActionWrapper>
