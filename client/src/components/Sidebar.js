@@ -13,6 +13,7 @@ import CreateVote from './CreateVote';
 import ChatBox from '3box-chatbox-react';
 import { Route } from 'react-router-dom';
 import Box from '3box';
+import VoteModal from './VoteModal';
 
 export default class Sidebar extends Component {
 	state = {
@@ -20,7 +21,7 @@ export default class Sidebar extends Component {
 		menu: [
 			{ text: 'Create New Groups', icon: <GroupIcon />, isOpen: false },
 			{ text: 'Create Vote', icon: <AddCircleIcon />, isOpen: false },
-			{ text: 'Vote', icon: <CreateIcon />, isOpen: false }
+			{ text: 'Vote', icon: <CreateIcon />, isOpen: true }
 		],
 		needToAWeb3Browser: false
 	};
@@ -62,6 +63,9 @@ export default class Sidebar extends Component {
 	closeCreateVote = () => {
 		this.onClose(1);
 	};
+	closeCreateVoteModal = () => {
+		this.onClose(2);
+	};
 
 	render() {
 		const { menu, activeIndex } = this.state;
@@ -73,6 +77,7 @@ export default class Sidebar extends Component {
 					showModal={menu[1].isOpen}
 					closeModal={() => this.onClose(activeIndex)}
 				/>
+				<VoteModal showModal={menu[2].isOpen} closeVote={() => this.closeCreateVoteModal()} />
 				<List>
 					{menu.map((item, index) => (
 						<ListItem key={item.text} onClick={() => this.active(index)} button key={item.text}>

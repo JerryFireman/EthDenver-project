@@ -14,16 +14,17 @@ export default class Button extends Component {
 }
 
 const ButtonBase = styled.div`
-	width: 200px;
+	width: ${(props) => (props.width ? `${props.width}px` : '200px')};
 	height: 50px;
 	border-radius: 8px;
 	box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.5);
-	background-image: ${(props) => (props.blue ? '#23BFE3' : `linear-gradient(to bottom, #7689a9, ${DUSK})`)};
+	//background-image: ${(props) => (props.blue ? '#23BFE3' : `linear-gradient(to bottom, #7689a9, ${DUSK})`)};
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: white;
 	cursor: pointer;
+	background-color: ${(props) => (props.blue ? '#23BFE3' : `linear-gradient(to bottom, #7689a9, ${DUSK})`)};
 `;
 
 const Text = styled.div`font-size: ${(props) => (props.fontSize ? props.fontSize : SMALL)};`;
