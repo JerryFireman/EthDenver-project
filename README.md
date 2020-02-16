@@ -33,11 +33,25 @@ The SimpleStorage.sol contract provides all of the functionality used to change 
 ### Truffle
 Truffle is used to compile and migrate all of the contracts used in the project. This repo was initiated using ```truffle unbox react``` and basic smart contract functionality was first tested using ```truffle test``` with unit tests created to confirm that the functions in SimpleStorage.sol worked properly.
 ### 3Box
-
+Social interaction between members in DAOs is provided through the integration of the following 3Box plugins:
+* Chatbox Plugin
+* Profile Hover Plugin
 ### Web3
+The Web3 library is used to get member accounts and instantiate contracts:
+```javascript
+// Get network provider and web3 instance.
+const web3 = await getWeb3();
+
+// Use web3 to get the user's accounts.
+const accounts = await web3.eth.getAccounts();
+
+// Get the contract instance.
+const networkId = await web3.eth.net.getId();
+const deployedNetwork = SimpleStorageContract.networks[networkId];
+const instance = new web3.eth.Contract(
+	SimpleStorageContract.abi,
+	deployedNetwork && deployedNetwork.address
+);
+```
 
 ## Features
-
-## Applications
-
-
