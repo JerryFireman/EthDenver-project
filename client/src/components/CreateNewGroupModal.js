@@ -116,6 +116,20 @@ export default class CreateNewGroupModal extends Component {
 		this.setState({ group: e.target.value });
 	};
 
+	resetModal = () => {
+		this.setState({ 
+			web3: null, 
+			accounts: null, 
+			contract: null, 
+			inputArray: [ '' ],
+			groupName: [ '' ],
+			input: null,
+			group: "null",
+			groupNumber: null,
+			memberCount: null 
+		});
+	};
+
 	render() {
 		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
 		const { inputArray, groupName } = this.state;
@@ -124,7 +138,7 @@ export default class CreateNewGroupModal extends Component {
 				<Dialog
 					// disableBackdropClick={true}
 					aria-describedby="alert-dialog-description"
-					onClose={closeModal}
+					onClose={closeModal && resetModal}
 					aria-labelledby="simple-dialog-title"
 					open={showModal}
 					fullWidth={true}
