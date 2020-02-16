@@ -21,7 +21,7 @@ export default class Sidebar extends Component {
 		menu: [
 			{ text: 'Create New Groups', icon: <GroupIcon />, isOpen: false },
 			{ text: 'Create Vote', icon: <AddCircleIcon />, isOpen: false },
-			{ text: 'Vote', icon: <CreateIcon />, isOpen: true }
+			{ text: 'Vote', icon: <CreateIcon />, isOpen: false }
 		],
 		needToAWeb3Browser: false
 	};
