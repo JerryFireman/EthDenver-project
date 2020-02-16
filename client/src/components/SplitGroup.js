@@ -18,18 +18,23 @@ export default class SplitGroup extends Component {
 		selectedGroup: '',
 		step: 1,
 		selectedMembers: [ '' ],
-		personName: [ '' ]
+		active: false
 	};
 	handleChange = (event) => {
 		this.setState({ selectedGroup: event.target.value });
 	};
 	handleMemberChange = (event) => {
-		console.log('event', event);
 		this.setState({ selectedMembers: event.target.value });
 	};
 	handleOnClick = () => {
 		this.setState({ step: 2 });
 	};
+	handleDoneOnClick = () => {
+		const { setSplitGroupVisibility } = this.props;
+		setSplitGroupVisibility(false);
+		console.log('Done!!');
+	};
+	closeModal = () => {};
 	render() {
 		const ITEM_HEIGHT = 48;
 		const ITEM_PADDING_TOP = 8;
@@ -41,14 +46,14 @@ export default class SplitGroup extends Component {
 				}
 			}
 		};
-		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
+		const { showModal, action, message, title, disableBackdropClick } = this.props;
 		const { selectedGroup, step, selectedMembers } = this.state;
 		return (
 			<div>
 				<Dialog
 					// disableBackdropClick={true}
 					aria-describedby="alert-dialog-description"
-					onClose={closeModal}
+					onClose={this.closeModal}
 					aria-labelledby="simple-dialog-title"
 					open={showModal}
 					fullWidth={true}
@@ -81,33 +86,40 @@ export default class SplitGroup extends Component {
 										<MenuItem value={20}>Group2</MenuItem>
 									</Select>
 								</FormControl>
+								<ActionWrapper>
+									<Button width={150} label={'Split'} handleOnClick={this.handleOnClick} />
+								</ActionWrapper>
 							</Fragment>
 						) : (
-							<FormControl style={{ minWidth: 250 }}>
-								<InputLabel id="demo-mutiple-checkbox-label">Select Members to New Group</InputLabel>
-								<Select
-									labelId="demo-mutiple-checkbox-label"
-									id="demo-mutiple-checkbox"
-									multiple
-									value={selectedMembers}
-									onChange={this.handleMemberChange}
-									input={<Input />}
-									renderValue={(selected) => selected.join(', ')}
-									MenuProps={MenuProps}
-								>
-									{[ 'name1', 'name2' ].map((name) => (
-										<MenuItem key={name} value={name}>
-											<Checkbox checked={selectedMembers.indexOf(name) > -1} />
-											<ListItemText primary={name} />
-										</MenuItem>
-									))}
-								</Select>
-							</FormControl>
+							<Fragment>
+								<FormControl style={{ minWidth: 250 }}>
+									<InputLabel id="demo-mutiple-checkbox-label">
+										Select Members to New Group
+									</InputLabel>
+									<Select
+										labelId="demo-mutiple-checkbox-label"
+										id="demo-mutiple-checkbox"
+										multiple
+										value={selectedMembers}
+										onChange={this.handleMemberChange}
+										input={<Input />}
+										renderValue={(selected) => selected.join(', ')}
+										MenuProps={MenuProps}
+									>
+										{[ 'name1', 'name2' ].map((name) => (
+											<MenuItem key={name} value={name}>
+												<Checkbox checked={selectedMembers.indexOf(name) > -1} />
+												<ListItemText primary={name} />
+											</MenuItem>
+										))}
+									</Select>
+								</FormControl>
+								<ActionWrapper>
+									<Button width={150} label={'Done'} handleOnClick={this.handleDoneOnClick} />
+								</ActionWrapper>
+							</Fragment>
 						)}
 					</DialogContent>
-					<ActionWrapper>
-						<Button width={150} label={'Split'} handleOnClick={this.handleOnClick} />
-					</ActionWrapper>
 				</Dialog>
 			</div>
 		);

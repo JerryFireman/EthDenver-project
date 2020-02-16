@@ -59,13 +59,20 @@ export default class Sidebar extends Component {
 			console.log('3Box synced');
 		}
 	}
+	closeCreateVote = () => {
+		this.onClose(1);
+	};
 
 	render() {
 		const { menu, activeIndex } = this.state;
 		return (
 			<Wrapper>
 				<CreateNewGroupModal showModal={menu[0].isOpen} closeModal={() => this.onClose(activeIndex)} />
-				<CreateVote showModal={menu[1].isOpen} closeModal={() => this.onClose(activeIndex)} />
+				<CreateVote
+					closeCreateVote={() => this.closeCreateVote()}
+					showModal={menu[1].isOpen}
+					closeModal={() => this.onClose(activeIndex)}
+				/>
 				<List>
 					{menu.map((item, index) => (
 						<ListItem key={item.text} onClick={() => this.active(index)} button key={item.text}>

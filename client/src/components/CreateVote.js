@@ -14,11 +14,19 @@ export default class CreateVote extends Component {
 		isSplitGroupOpen: false,
 		isMergeGroupOpen: false
 	};
+
 	handleSplitGroupOnClick = () => {
+		const { closeCreateVote } = this.props;
 		this.setState({ isSplitGroupOpen: true });
+		closeCreateVote();
+	};
+	setSplitGroupVisibility = (isOpen) => {
+		this.setState({ isSplitGroupOpen: isOpen });
 	};
 	handleMergeGroupOnClick = () => {
+		const { closeCreateVote } = this.props;
 		this.setState({ isMergeGroupOpen: true });
+		closeCreateVote();
 	};
 
 	render() {
@@ -26,7 +34,10 @@ export default class CreateVote extends Component {
 		const { isSplitGroupOpen } = this.state;
 		return (
 			<div>
-				<SplitGroup showModal={isSplitGroupOpen} />
+				<SplitGroup
+					setSplitGroupVisibility={(isOpen) => this.setSplitGroupVisibility(isOpen)}
+					showModal={isSplitGroupOpen}
+				/>
 				<Dialog
 					// disableBackdropClick={true}
 					aria-describedby="alert-dialog-description"
