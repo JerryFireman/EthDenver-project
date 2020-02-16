@@ -139,7 +139,7 @@ contract SimpleStorage {
     // i think this is not needed in UI, just for testing
     // return error if member has not voted
     function readMemberVote(uint memberNumber)
-    internal
+    public
     view
     returns (bool)
     {
