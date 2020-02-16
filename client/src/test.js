@@ -251,95 +251,99 @@ class Test extends Component {
 								</button>
 							</form>
 
-							<form>
-								<label>
-									Member Name:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.createMember}>
-									Create Member{' '}
-								</button>
-							</form>
+							{currentActiveTab === 0 && (
+								<Fragment>
+									<form>
+										<label>
+											Group Name:
+											<input type="text" onChange={this.handleChange} />
+										</label>
+										<button value="Submit" onClick={this.createGroup}>
+											Create Group{' '}
+										</button>
+									</form>
 
-							<form>
-								<label>
-									Group Name:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.createGroup}>
-									Create Group{' '}
-								</button>
-							</form>
+									<form>
+										<label>
+											Member Number:
+											<input type="text" onChange={this.handleChange} />
+										</label>
+										<button value="Submit" onClick={this.joinGroup}>
+											Join Group{' '}
+										</button>
+									</form>
+								</Fragment>
+							)}
 
-							<form>
-								<label>
-									Member Number:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.joinGroup}>
-									Join Group{' '}
-								</button>
-							</form>
+							{currentActiveTab === 1 && (
+								<Fragment>
+									<form>
+										<label>
+											Member Number:
+											<input type="text" onChange={this.handleChange} />
+										</label>
+										<button value="Submit" onClick={this.readMember}>
+											Read Member{' '}
+										</button>
+									</form>
+									<form>
+										<label>
+											Group Number:
+											<input type="text" onChange={this.handleChange} />
+										</label>
+										<button value="Submit" onClick={this.splitGroup}>
+											Split Group{' '}
+										</button>
+									</form>
+								</Fragment>
+							)}
 
-							<form>
-								<label>
-									Group Number:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.readGroup}>
-									Read Group{' '}
-								</button>
-							</form>
+							{currentActiveTab === 2 && (
+								<Fragment>
+									<form>
+										<label>
+											Group Number:
+											<input type="text" onChange={this.handleChange} />
+										</label>
+										<button value="Submit" onClick={this.countVotes}>
+											Count Votes{' '}
+										</button>
+									</form>
+									<form>
+										<label>
+											Vote:
+											<input type="text" onChange={this.handleChange} />
+										</label>
+										<button value="Submit" onClick={this.executeVote}>
+											Enter 1 to Vote "Split Group" {' '}
+										</button>
+									</form>
+								</Fragment>
+							)}
 
-							<form>
-								<label>
-									Member Number:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.readMember}>
-									Read Member{' '}
-								</button>
-							</form>
+							{currentActiveTab === 3 && (
+								<Fragment>
+									<form>
+										<label>
+											Member Name:
+											<input type="text" onChange={this.handleChange} />
+										</label>
+										<button value="Submit" onClick={this.createMember}>
+											Create Member{' '}
+										</button>
+									</form>
 
-							<form>
-								<label>
-									Group Number:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.readMemberListInGroup}>
-									Read Group Member List{' '}
-								</button>
-							</form>
-
-							<form>
-								<label>
-									Group Number:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.countVotes}>
-									Count Votes{' '}
-								</button>
-							</form>
-
-							<form>
-								<label>
-									Vote:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.executeVote}>
-									Enter 1 to Vote "Split Group" {' '}
-								</button>
-							</form>
-
-							<form>
-								<label>
-									Group Number:
-									<input type="text" onChange={this.handleChange} />
-								</label>
-								<button value="Submit" onClick={this.splitGroup}>
-									Split Group{' '}
-								</button>
-							</form>
+									<form>
+										<label>
+											Group Number:
+											<input type="text" onChange={this.handleChange} />
+										</label>
+										<button value="Submit" onClick={this.readMemberListInGroup}>
+											Read Group Member List{' '}
+										</button>
+									</form>
+								</Fragment>
+							)}
 						</div>
 					</Wrapper>
 				</Container>

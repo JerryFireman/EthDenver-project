@@ -16,6 +16,7 @@ import Box from '3box';
 import VoteModal from './VoteModal';
 import { setupTab } from '../redux/actions';
 import { connect } from 'react-redux';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 class Sidebar2 extends Component {
 	state = {
@@ -23,7 +24,8 @@ class Sidebar2 extends Component {
 		menu: [
 			{ text: 'Create New Groups', icon: <GroupIcon />, isOpen: false },
 			{ text: 'Create Vote', icon: <AddCircleIcon />, isOpen: false },
-			{ text: 'Vote', icon: <CreateIcon />, isOpen: false }
+			{ text: 'Vote', icon: <CreateIcon />, isOpen: false },
+			{ text: 'Members', icon: <AccountCircleIcon />, isOpen: false }
 		],
 		needToAWeb3Browser: false
 	};
