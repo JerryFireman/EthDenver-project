@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import { LARGE } from './Utils/constant.js';
 import Tree from './components/Tree.js';
 import 'treeflex/dist/css/treeflex.css';
+import ProfileHover from 'profile-hover';
 
 class Test extends Component {
 	constructor(props) {
@@ -276,6 +277,9 @@ class Test extends Component {
 					<Sidebar2 />
 					<Wrapper>
 						<div className="App">
+							<div>
+								<br />
+							</div>
 							<div>Group name: {this.state.groupName}</div>
 							<div>Group number: {this.state.groupNumber}</div>
 							<div>Member name: {this.state.memberName}</div>
