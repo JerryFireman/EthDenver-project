@@ -12,14 +12,81 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
+import SimpleStorageContract from '../contracts/SimpleStorage.json';
+import getWeb3 from '../getWeb3';
 
 export default class SplitGroup extends Component {
 	state = {
 		selectedGroup: '',
 		step: 1,
 		selectedMembers: [ '' ],
-		active: false
+		active: false,
+		web3: null, 
+		accounts: null, 
+		contract: null, 
+		inputArray: [ '' ],
+		groupName: [ '' ],
+		input: null,
+		group: "null",
+		groupNumber: null,
+		memberCount: null
 	};
+
+	componentDidMount = async () => {
+		try {
+			// Get network provider and web3 instance.
+			const web3 = await getWeb3();
+
+			// Use web3 to get the user's accounts.
+			const accounts = await web3.eth.getAccounts();
+
+			// Get the contract instance.
+			const networkId = await web3.eth.net.getId();
+			const deployedNetwork = SimpleStorageContract.networks[networkId];
+			const instance = new web3.eth.Contract(
+				SimpleStorageContract.abi,
+				deployedNetwork && deployedNetwork.address
+			);
+
+			instance.events.LogSet((error, event) => {
+				console.log(event);
+			});
+
+			// Set web3, accounts, and contract to the state, and then proceed with an
+			// example of interacting with the contract's methods.
+			this.setState({ web3, accounts, contract: instance });
+		} catch (error) {
+			// Catch any errors for any of the above operations.
+			alert(`Failed to load web3, accounts, or contract. Check console for details.`);
+			console.error(error);
+		}
+	};
+
+	splitGroup = async (event) => {
+		event.preventDefault()
+		const { accounts, contract } = this.state;
+		var newGroupNum = parseInt(this.state.selectedGroup) + 1;
+
+		const response = await contract.methods.splitGroup(this.state.selectedGroup, this.state.selectedMembers, newGroupNum).send({ from: accounts[0] });
+		const newGroup = await contract.methods.createGroup("newGroup", this.state.groupNumber).call();
+		this.setState({ groupNumber: newGroupNum });
+
+		var splitMembers = this.state.selectedMembers;
+		for (var i = 0; i < splitMembers.length; i++) {
+			await contract.methods.joinGroup(splitMembers[i], this.state.groupNumber).send({ from: accounts[0] });
+		}
+	}; 
+
+	createGroup = async (event) => {
+		event.preventDefault()
+		
+		const { accounts, contract } = this.state;
+		const response = await contract.methods.createGroup(this.state.input, this.state.groupNumber).call();
+	  
+		// Update state with the result.
+		this.setState({ groupNumber: response <= this.state.groupNumber ? parseInt(this.state.groupNumber) + 1 : response, groupName: this.state.input });
+	  };
+
 	handleChange = (event) => {
 		this.setState({ selectedGroup: event.target.value });
 	};
@@ -64,8 +131,7 @@ export default class SplitGroup extends Component {
 							borderRadius: '11px',
 							backgroundColor: DUSK
 						}
-					}}
-				>
+					}}>
 					<DialogTitle id="simple-dialog-title">New Vote</DialogTitle>
 					<DialogContent>
 						<TextWhite>Split Group</TextWhite>
@@ -80,8 +146,7 @@ export default class SplitGroup extends Component {
 										labelId="demo-simple-select-label"
 										id="demo-simple-select"
 										value={selectedGroup}
-										onChange={this.handleChange}
-									>
+										onChange={this.handleChange}>
 										<MenuItem value={10}>Group1</MenuItem>
 										<MenuItem value={20}>Group2</MenuItem>
 									</Select>
@@ -115,7 +180,7 @@ export default class SplitGroup extends Component {
 									</Select>
 								</FormControl>
 								<ActionWrapper>
-									<Button width={150} label={'Done'} handleOnClick={this.handleDoneOnClick} />
+									<Button width={150} label={'Done'} handleOnClick={this.splitGroup && this.handleDoneOnClick} />
 								</ActionWrapper>
 							</Fragment>
 						)}
