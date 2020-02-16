@@ -9,21 +9,40 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 
 export default class CreateNewGroupModal extends Component {
 	state = {
-		inputArray: [ '' ]
+		inputArray: [ '' ],
+		input: null,
+		group: null
 	};
 	handleOnClick = () => {
 		console.log('create group!');
+
+		
+
 	};
+
 	onTextChange = (address, index) => {
 		const { inputArray } = this.state;
 		let newInputArray = inputArray;
 		newInputArray[index] = address;
 		this.setState({ inputArray: newInputArray });
 	};
+
 	handleOnAdd = () => {
 		const { inputArray } = this.state;
 		this.setState({ inputArray: inputArray.concat('') });
 	};
+
+	handleChange = async (e) => {
+		console.log(e.target.value);
+		this.setState({ input: e.target.value });
+	};
+
+
+	updateGroup = async (e) => {
+		console.log(e.target.value);
+		this.setState({ group: e.target.value });
+	};
+
 	render() {
 		const { closeModal, showModal, action, message, title, disableBackdropClick } = this.props;
 		const { inputArray } = this.state;
@@ -45,8 +64,13 @@ export default class CreateNewGroupModal extends Component {
 						}
 					}}
 				>
-					<DialogTitle id="simple-dialog-title">Create New Groups</DialogTitle>
+					<DialogTitle id="simple-dialog-title" ><span style={{color: 'white'}}>Create New Group</span></DialogTitle>
 					<DialogContent>
+					<TextWhite>Group Name: {this.state.group}</TextWhite>
+						<TextInput
+							onChange={this.updateGroup}
+							placeholder={'e.g. company name'}
+						/>
 						<TextWhite>Assign Members</TextWhite>
 						{inputArray.map((item, index) => (
 							<TextInput
@@ -60,7 +84,7 @@ export default class CreateNewGroupModal extends Component {
 						<AddBoxIcon onClick={this.handleOnAdd} />
 					</DialogContent>
 					<ActionWrapper>
-						<Button width={150} label={'Create'} handleOnClick={this.handleOnClick} />
+						<Button width={150} label={'Create'} handleOnClick={this.handleOnClick && closeModal} />
 					</ActionWrapper>
 				</Dialog>
 			</div>
