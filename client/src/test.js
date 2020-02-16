@@ -110,7 +110,7 @@ export default class Test extends Component {
 		event.preventDefault()
 		
 		const { accounts, contract } = this.state;
-		const response = await contract.methods.joinGroup(this.state.input, this.state.groupNumber).call();
+		const response = await contract.methods.joinGroup(this.state.input, this.state.groupNumber).send({ from: accounts[0] });
 	  };
 	  
 	  readGroup = async (event) => {
@@ -186,7 +186,7 @@ export default class Test extends Component {
 		const { accounts, contract } = this.state;
 		try {
 			const vote = this.state.input == 1 ? true : false;
-			const response = await contract.methods.executeVote(this.state.memberNumber, vote).call();
+			const response = await contract.methods.executeVote(this.state.memberNumber, true).send({ from: accounts[0] });
 		} catch (e) {
 			console.log(e);
 		}
@@ -198,7 +198,7 @@ export default class Test extends Component {
 		res.push(1);
 		const { accounts, contract } = this.state;
 		var newGroup = parseInt(this.state.groupNumber);
-		const response = await contract.methods.splitGroup(this.state.groupNumber, res, newGroup).call();
+		const response = await contract.methods.splitGroup(this.state.groupNumber, res, newGroup).send({ from: accounts[0] });
 
 	  }; 
 
@@ -311,7 +311,7 @@ export default class Test extends Component {
 
 				<form>
 					<label>
-						Member Number:
+						Vote:
 						<input type="text" onChange={this.handleChange} />
 					</label>
 					<button value="Submit" onClick={this.executeVote}>
