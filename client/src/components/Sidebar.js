@@ -25,15 +25,12 @@ export default class Sidebar extends Component {
 		needToAWeb3Browser: false
 	};
 	active = (index) => {
-		const { menu, activeIndex } = this.state;
-		console.log('index', index);
-		console.log('activeIndex', activeIndex);
+		const { menu } = this.state;
 		let newMenu = menu;
 		newMenu[index]['isOpen'] = true;
 		this.setState({ menu: newMenu, activeIndex: index });
 	};
 	onClose = (index) => {
-		console.log('index', index);
 		const { menu } = this.state;
 		let newMenu = menu;
 		newMenu[index]['isOpen'] = false;
@@ -63,7 +60,6 @@ export default class Sidebar extends Component {
 		}
 	}
 
-	//closeModal, showModal, action, message, title, disableBackdropClick
 	render() {
 		const { menu, activeIndex } = this.state;
 		return (
