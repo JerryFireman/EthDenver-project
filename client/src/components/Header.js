@@ -6,7 +6,7 @@ export const HEADER_HEIGHT = 74;
 
 export default class Header extends Component {
 	render() {
-		return <HeaderContainer>GOOGLE</HeaderContainer>;
+		return <HeaderContainer>DAOmocracy</HeaderContainer>;
 	}
 }
 
@@ -18,6 +18,7 @@ const HeaderContainer = styled.div`
 	align-items: center;
 	padding-left: 20px;
 	box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.5);
+	color: white;
 `;
 
 const Image = styled.img`width: 100px;`;
