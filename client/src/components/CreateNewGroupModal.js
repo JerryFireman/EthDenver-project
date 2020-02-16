@@ -138,7 +138,7 @@ export default class CreateNewGroupModal extends Component {
 				<Dialog
 					// disableBackdropClick={true}
 					aria-describedby="alert-dialog-description"
-					onClose={closeModal && resetModal}
+					onClose={closeModal && this.resetModal}
 					aria-labelledby="simple-dialog-title"
 					open={showModal}
 					fullWidth={true}
