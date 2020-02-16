@@ -9,6 +9,9 @@ import Sidebar2 from './components/Sidebar2.js';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Sidebar from './components/Sidebar.js';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { LARGE } from './Utils/constant.js';
 
 class Test extends Component {
 	constructor(props) {
@@ -253,95 +256,91 @@ class Test extends Component {
 
 							{currentActiveTab === 0 && (
 								<Fragment>
-									<form>
-										<label>
-											Group Name:
-											<input type="text" onChange={this.handleChange} />
-										</label>
-										<button value="Submit" onClick={this.createGroup}>
-											Create Group{' '}
-										</button>
-									</form>
+									<Wrapper2>
+										<TextWhite>Group Name:</TextWhite>
+										<TextInput onChange={this.handleChange} placeholder={'e.g. Backend'} />
+										{/* <input type="text" onChange={this.handleChange} /> */}
 
-									<form>
-										<label>
-											Member Number:
-											<input type="text" onChange={this.handleChange} />
-										</label>
-										<button value="Submit" onClick={this.joinGroup}>
-											Join Group{' '}
-										</button>
-									</form>
+										<Button variant="contained" onClick={this.createGroup}>
+											Create Group
+										</Button>
+									</Wrapper2>
+
+									<Wrapper2>
+										<TextWhite>Member Number:</TextWhite>
+										<TextInput onChange={this.handleChange} placeholder={'e.g. 0'} />
+										{/* <input type="text" onChange={this.handleChange} /> */}
+
+										<Button variant="contained" onClick={this.joinGroup}>
+											Join Group
+										</Button>
+									</Wrapper2>
 								</Fragment>
 							)}
 
 							{currentActiveTab === 1 && (
 								<Fragment>
-									<form>
-										<label>
-											Member Number:
-											<input type="text" onChange={this.handleChange} />
-										</label>
-										<button value="Submit" onClick={this.readMember}>
-											Read Member{' '}
-										</button>
-									</form>
-									<form>
-										<label>
-											Group Number:
-											<input type="text" onChange={this.handleChange} />
-										</label>
-										<button value="Submit" onClick={this.splitGroup}>
-											Split Group{' '}
-										</button>
-									</form>
+									<Wrapper2>
+										<TextWhite>Member Number:</TextWhite>
+										<TextInput onChange={this.handleChange} placeholder={'e.g. 0'} />
+
+										<Button variant="contained" onClick={this.readMember}>
+											Read Member
+										</Button>
+									</Wrapper2>
+
+									<Wrapper2>
+										<TextWhite>Group Number:</TextWhite>
+										<TextInput onChange={this.handleChange} placeholder={'e.g. 0'} />
+
+										<Button variant="contained" onClick={this.splitGroup}>
+											Split Group
+										</Button>
+									</Wrapper2>
 								</Fragment>
 							)}
 
 							{currentActiveTab === 2 && (
 								<Fragment>
-									<form>
-										<label>
-											Group Number:
-											<input type="text" onChange={this.handleChange} />
-										</label>
-										<button value="Submit" onClick={this.countVotes}>
-											Count Votes{' '}
-										</button>
-									</form>
-									<form>
-										<label>
-											Vote:
-											<input type="text" onChange={this.handleChange} />
-										</label>
-										<button value="Submit" onClick={this.executeVote}>
-											Enter 1 to Vote "Split Group" {' '}
-										</button>
-									</form>
+									<Wrapper2>
+										<TextWhite>Group Number:</TextWhite>
+										<TextInput onChange={this.handleChange} placeholder={'e.g. 0'} />
+
+										<Button variant="contained" onClick={this.countVotes}>
+											Count Votes
+										</Button>
+									</Wrapper2>
+
+									<Wrapper2>
+										<TextWhite>Vote:</TextWhite>
+										<TextInput onChange={this.handleChange} placeholder={'e.g. 0'} />
+
+										<Button variant="contained" onClick={this.executeVote}>
+											Enter 1 to Vote "Split Group"
+										</Button>
+									</Wrapper2>
 								</Fragment>
 							)}
 
 							{currentActiveTab === 3 && (
 								<Fragment>
-									<form>
-										<label>
-											Member Name:
-											<input type="text" onChange={this.handleChange} />
-										</label>
-										<button value="Submit" onClick={this.createMember}>
-											Create Member{' '}
-										</button>
-									</form>
+									<Wrapper2>
+										<TextWhite>Member Name:</TextWhite>
+										<TextInput onChange={this.handleChange} placeholder={'e.g. 0'} />
 
-									<form>
-										<label>
-											Group Number:
-											<input type="text" onChange={this.handleChange} />
-										</label>
-										<button value="Submit" onClick={this.readMemberListInGroup}>
-											Read Group Member List{' '}
-										</button>
-									</form>
+										<Button variant="contained" onClick={this.createMember}>
+											Create Member
+										</Button>
+									</Wrapper2>
+
+									<Wrapper2>
+										<TextWhite>Group Number:</TextWhite>
+										<TextInput onChange={this.handleChange} placeholder={'e.g. 0'} />
+
+										<Button variant="contained" onClick={this.readMemberListInGroup}>
+											Read Group Member List
+										</Button>
+									</Wrapper2>
 								</Fragment>
 							)}
 						</div>
@@ -361,4 +360,37 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, null)(Test);
 
-const Wrapper = styled.div`width: 100%;`;
+const Wrapper = styled.div`
+	width: 100%;
+	background: #29344b;
+	color: white;
+`;
+const TextInput = styled.input`
+	font-size: 20px;
+	color: white;
+	height: 51px;
+	background-color: #36435d;
+	border: none;
+	padding: 5px 10px;
+	box-sizing: border-box;
+	width: 100%;
+	caret-color: white;
+	margin-bottom: 10px;
+	::placeholder {
+		color: rgba(255, 255, 255, 0.3);
+		font-size: 15px;
+	}
+	&:focus {
+		outline: none;
+	}
+`;
+const TextWhite = styled.div`
+	color: white;
+	display: flex;
+	margin: 20px 0;
+	font-size: ${LARGE};
+`;
+const Wrapper2 = styled.div`
+	width: 70%;
+	margin: auto;
+`;
