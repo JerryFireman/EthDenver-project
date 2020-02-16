@@ -36,36 +36,11 @@ class InitWeb3Component extends Component {
 			console.log('init!! web3, accounts, instance', web3, accounts, instance);
 			// Set web3, accounts, and contract to the state, and then proceed with an
 			// example of interacting with the contract's methods.
-			this.setState({ web3, accounts, contract: instance });
+			this.props.initWeb3({ web3, accounts, contract: instance });
 		} catch (error) {
 			// Catch any errors for any of the above operations.
 			console.error(error);
 		}
-	};
-
-	readGroup = async (event) => {
-		event.preventDefault();
-
-		const { accounts, contract } = this.state;
-		const response = await contract.methods.readGroup(this.state.groupNumber).call();
-	};
-
-	readMember = async (event) => {
-		event.preventDefault();
-
-		const { accounts, contract } = this.state;
-		const response = await contract.methods.readMember(this.state.input).call();
-
-		this.setState({ member: response });
-	};
-
-	readMemberListInGroup = async (event) => {
-		event.preventDefault();
-
-		const { accounts, contract } = this.state;
-		const response = await contract.methods.readMemberListInGroup(this.state.input).call();
-
-		this.setState({ groupMembers: response });
 	};
 
 	render() {

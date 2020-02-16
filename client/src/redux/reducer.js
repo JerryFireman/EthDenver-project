@@ -10,7 +10,9 @@ const reducer = (state = initialState, action) => {
 		case types.INIT_WEB3:
 			return {
 				...state,
-				web3: action.payload
+				web3: action.payload.web3,
+				accounts: action.payload.accounts,
+				contract: action.payload.contract
 			};
 		default:
 			return state;
