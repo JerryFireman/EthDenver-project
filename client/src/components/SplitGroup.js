@@ -18,7 +18,8 @@ export default class SplitGroup extends Component {
 		selectedGroup: '',
 		step: 1,
 		selectedMembers: [ '' ],
-		active: false
+		active: false,
+		newGroupName: ''
 	};
 	handleChange = (event) => {
 		this.setState({ selectedGroup: event.target.value });
@@ -35,6 +36,9 @@ export default class SplitGroup extends Component {
 		console.log('Done!!');
 	};
 	closeModal = () => {};
+	onNameChange = (name) => {
+		this.setState({ newGroupName: name });
+	};
 	render() {
 		const ITEM_HEIGHT = 48;
 		const ITEM_PADDING_TOP = 8;
@@ -47,7 +51,7 @@ export default class SplitGroup extends Component {
 			}
 		};
 		const { showModal, action, message, title, disableBackdropClick } = this.props;
-		const { selectedGroup, step, selectedMembers } = this.state;
+		const { selectedGroup, step, selectedMembers, newGroupName } = this.state;
 		return (
 			<div>
 				<Dialog
@@ -86,6 +90,14 @@ export default class SplitGroup extends Component {
 										<MenuItem value={20}>Group2</MenuItem>
 									</Select>
 								</FormControl>
+
+								<TextWhite>new Group Name:</TextWhite>
+
+								<TextInput
+									value={newGroupName}
+									onChange={({ target }) => this.onNameChange(target.value)}
+									placeholder={'e.g. backend'}
+								/>
 								<ActionWrapper>
 									<Button width={150} label={'Split'} handleOnClick={this.handleOnClick} />
 								</ActionWrapper>
@@ -136,4 +148,21 @@ const ActionWrapper = styled.div`
 	display: flex;
 	margin-bottom: 30px;
 	justify-content: space-around;
+`;
+const TextInput = styled.input`
+	height: 51px;
+	background-color: #36435d;
+	border: none;
+	padding: 5px 10px;
+	box-sizing: border-box;
+	width: 100%;
+	caret-color: white;
+	margin-bottom: 10px;
+	::placeholder {
+		color: rgba(255, 255, 255, 0.3);
+		font-size: 15px;
+	}
+	&:focus {
+		outline: none;
+	}
 `;
