@@ -71,7 +71,7 @@ export default class Sidebar extends Component {
 		const { menu, activeIndex } = this.state;
 		return (
 			<Wrapper>
-				<CreateNewGroupModal showModal={menu[0].isOpen} closeModal={() => this.onClose(activeIndex)} />
+				<CreateNewGroupModal showModal={menu[0].isOpen} closeModal={() => this.onClose(activeIndex)} treeGroup={this.props.treeGroup} groupArray={this.props.groupArray} />
 				<CreateVote
 					closeCreateVote={() => this.closeCreateVote()}
 					showModal={menu[1].isOpen}
